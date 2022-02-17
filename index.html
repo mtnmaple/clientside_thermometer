@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<!--	Laura Mills Nelson
+	February 5, 2020
+	Client Side Programming, CSCI_211_01_SP2020
+	Assignment 1
+-->
+
+<html lang="en">
+<head>
+<title> Assignment 1 - Thermometer </title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+	<!-- Styles the thermometer boxes and warning message -->	
+<style>
+	.zbox
+	{
+		width: 200px;
+		height: 100px;
+		border-width: 3px;
+		margin: 5px;
+		text-align: center;
+		font-size: 24pt;
+	}
+		
+	#warningColor
+	{
+		font-style: italic;
+		color: red;
+	}
+	
+</style>
+	
+<script>  
+
+//Thermometer Bar -----------------------------------------
+	//clears the text box
+	function clearAmt()
+		{
+			document.getElementById("amtRaised").value = null;
+			document.getElementById("warningColor").innerHTML = null;
+		}
+	
+	//displays the thermometer
+	function displayAmt()
+	{
+		var userInput = Number(document.getElementById("amtRaised").value);
+		var message = "Please enter a number greater than 0.";
+		var bonus = "We raised more than our $1000 goal!"
+				
+		//reset the boxes
+		resetBoxes();
+				
+		//thermometer if else
+		if (userInput < 0)
+		{
+			document.getElementById("warningColor").innerHTML = message;					
+		}
+		else if (userInput >= 0 && userInput <= 500)
+		{
+			document.getElementById("boxRed").style.backgroundColor = "red";				
+		}
+		else if (userInput >= 501 && userInput <= 750)
+		{
+			document.getElementById("boxRed").style.backgroundColor = "red";
+			document.getElementById("boxYellow").style.backgroundColor = "yellow";					
+		}
+		else if (userInput >= 751 && userInput <= 999)
+		{
+			document.getElementById("boxRed").style.backgroundColor = "red";
+			document.getElementById("boxYellow").style.backgroundColor = "yellow";	
+			document.getElementById("boxGreen").style.backgroundColor = "green";
+		}
+		else if (userInput >= 999 && userInput <= 1000)
+		{
+			document.getElementById("boxRed").style.backgroundColor = "red";
+			document.getElementById("boxYellow").style.backgroundColor = "yellow";	
+			document.getElementById("boxGreen").style.backgroundColor = "green";
+			document.getElementById("boxBlue").style.backgroundColor = "blue";
+		}
+		//displays a bonus message if more than $1000 is raised
+		else if (userInput > 1000)
+		{
+			document.getElementById("boxRed").style.backgroundColor = "red";
+			document.getElementById("boxYellow").style.backgroundColor = "yellow";	
+			document.getElementById("boxGreen").style.backgroundColor = "green";
+			document.getElementById("boxBlue").style.backgroundColor = "blue";
+			
+			document.getElementById("bonus").innerHTML = bonus;
+		}
+		//displays a warning message if a negative value or something other than a number is entered
+		else
+		{
+			document.getElementById("warningColor").innerHTML = message;
+		}
+	}
+	
+	//resets the thermometer
+	function resetBoxes()
+	{
+		//get all the boxes and store them into an array
+		var boxes = document.getElementsByClassName("zbox");
+				
+		for (var cntr = 0; cntr < boxes.length; cntr++)
+		{
+			boxes[cntr].style.backgroundColor = "white";				
+		}
+				
+		//reset inputbox
+		document.getElementById("amtRaised").value = "";
+				
+		//reset the warning message
+		document.getElementById("warningColor").innerHTML = "";
+		
+		//reset the bonus message
+		document.getElementById("bonus").innerHTML = "";
+	}
+//End of Thermometer Bar functions --------------------------
+
+
+</script>
+	
+</head>
+<body>	
+	
+<!-- Save the Puppies Foundation Thermometer Bar -->
+	
+	<p> <strong> Save the Puppies Foundation </strong><br><br>
+	
+	We are trying to raise $1000 for the "Save the Puppies Foundation". <br><br>
+	Enter the total raised so far: <br><br>
+	$<input type="text" id="amtRaised" name="amtRaised" onfocus="clearAmt()" value="" size ="25" placeholder = "Enter a value greater than 0">
+	<input type="button"  value="Enter" onclick="displayAmt()">
+	<input type = "button" value = "Reset" onclick = "resetBoxes()" >
+	<span id = "warningColor"></span>
+	<span id = "bonus"></span>
+	</p>
+	
+	<div id = "boxBlue" class = "zbox"> $1000 </div>
+	<div id = "boxGreen" class = "zbox"> $751 - 999 </div>
+	<div id = "boxYellow" class = "zbox"> $501 - 750 </div>
+	<div id = "boxRed" class = "zbox"> $0 - 500 </div>
+<!-- End of Save the Puppies Foundation Thermometer Bar -->
+
+
+	</body>
+</html>
